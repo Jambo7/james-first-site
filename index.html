@@ -22,6 +22,10 @@
       </nav>
     </div>
   </header>
+  <h2>Eggs in Inventory: <span id="eggCount">0</span></h2>
+
+<button id="addEgg">Add Egg</button>
+<button id="removeEgg">Remove Egg</button>
 
   <main>
     <!-- ===== HOME: all sections below ===== -->
@@ -216,14 +220,23 @@
     </div>
   </footer>
   <script>
-    alert("It works!")
-    </script>
-    <script>
-      const button = document.getElementById("myButton");
-    
-      button.addEventListener("click", function() {
-        alert("You clicked the button!");
-      });
-    </script>
+    let count = 0;
+  
+    const countDisplay = document.getElementById("eggCount");
+    const addButton = document.getElementById("addEgg");
+    const removeButton = document.getElementById("removeEgg");
+  
+    addButton.addEventListener("click", function() {
+      count++;
+      countDisplay.textContent = count;
+    });
+  
+    removeButton.addEventListener("click", function() {
+      if (count > 0) {
+        count--;
+        countDisplay.textContent = count;
+      }
+    });
+  </script>
 </body>
 </html>
