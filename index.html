@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <button id="myButton">Click Me</button>
   <header class="header">
     <div class="header__inner">
       <a href="index.html" class="header__logo">PantryPilot</a>
@@ -214,5 +215,15 @@
       <p class="footer__copy">© PantryPilot. All rights reserved.</p>
     </div>
   </footer>
+  <script>
+    alert("It works!")
+    </script>
+    <script>
+      const button = document.getElementById("myButton");
+    
+      button.addEventListener("click", function() {
+        alert("You clicked the button!");
+      });
+    </script>
 </body>
 </html>
