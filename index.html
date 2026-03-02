@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <button id="myButton">Click Me</button>
   <header class="header">
     <div class="header__inner">
       <a href="index.html" class="header__logo">PantryPilot</a>
@@ -24,8 +23,9 @@
   </header>
   <h2>Eggs in Inventory: <span id="eggCount">0</span></h2>
 
-<button id="addEgg">Add Egg</button>
-<button id="removeEgg">Remove Egg</button>
+  <button id="addEgg">Add Egg</button>
+  <button id="removeEgg">Remove Egg</button>
+  <button id="resetEgg">Reset</button>
 
   <main>
     <!-- ===== HOME: all sections below ===== -->
@@ -220,23 +220,44 @@
     </div>
   </footer>
   <script>
-    let count = 0;
-  
-    const countDisplay = document.getElementById("eggCount");
-    const addButton = document.getElementById("addEgg");
-    const removeButton = document.getElementById("removeEgg");
-  
-    addButton.addEventListener("click", function() {
-      count++;
-      countDisplay.textContent = count;
-    });
-  
-    removeButton.addEventListener("click", function() {
-      if (count > 0) {
-        count--;
-        countDisplay.textContent = count;
+    // Load saved value (if any)
+    let eggCount = parseInt(localStorage.getItem("eggCount"), 10);
+    if (isNaN(eggCount)) eggCount = 0;
+
+    // Grab elements
+    const eggCountDisplay = document.getElementById("eggCount");
+    const addEggButton = document.getElementById("addEgg");
+    const removeEggButton = document.getElementById("removeEgg");
+    const resetEggButton = document.getElementById("resetEgg");
+
+    if (eggCountDisplay && addEggButton && removeEggButton && resetEggButton) {
+      function renderEggCount() {
+        eggCountDisplay.textContent = eggCount;
+        localStorage.setItem("eggCount", String(eggCount));
       }
-    });
+
+      // Show initial value
+      renderEggCount();
+
+      addEggButton.addEventListener("click", function () {
+        eggCount += 1;
+        renderEggCount();
+      });
+
+      removeEggButton.addEventListener("click", function () {
+        if (eggCount > 0) {
+          eggCount -= 1;
+          renderEggCount();
+        }
+      });
+
+      resetEggButton.addEventListener("click", function () {
+        eggCount = 0;
+        renderEggCount();
+      });
+    } else {
+      console.error("Egg counter elements not found in the DOM.");
+    }
   </script>
 </body>
 </html>
